@@ -73,8 +73,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Digitalyze — Custom Software, Web & Mobile App Development Agency" },
-      { name: "description", content: "Digitalyze builds mobile apps, web apps, SaaS platforms, CRMs and MVPs for startups and growing businesses. Fast delivery, transparent pricing, dedicated team." },
+      { title: "Digitalyze: AI-Powered Technology & Digital Growth Partner" },
+      { name: "description", content: "Digitalyze builds custom web apps, business systems, mobile apps and AI-Product development for startups and enterprises. Modern technology solutions that drive real growth." },
       { name: "author", content: "Digitalyze" },
       { property: "og:title", content: "Digitalyze — We Turn Your Idea Into a Working Product" },
       { property: "og:description", content: "Custom software, mobile apps, web apps, SaaS and MVPs for startups and businesses." },
@@ -102,8 +102,40 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+
+        {/* Google Tag Manager */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5L6VMM5J');`,
+          }}
+        />
+
+        {/* Google Analytics 4 */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-99T66S3V2G" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-99T66S3V2G');`,
+          }}
+        />
       </head>
       <body>
+        {/* Google Tag Manager (noscript fallback) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-5L6VMM5J"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+
         {children}
         <Scripts />
       </body>

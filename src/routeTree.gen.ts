@@ -9,7 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as IndustriesRouteImport } from './routes/industries'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CaseStudiesRouteImport } from './routes/case-studies'
@@ -22,9 +24,19 @@ import { Route as ServicesMobileAppDevelopmentRouteImport } from './routes/servi
 import { Route as ServicesCustomSoftwareDevelopmentRouteImport } from './routes/services.custom-software-development'
 import { Route as ServicesBusinessWebsiteDevelopmentRouteImport } from './routes/services.business-website-development'
 
+const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
+  id: '/terms-of-service',
+  path: '/terms-of-service',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndustriesRoute = IndustriesRouteImport.update({
@@ -93,7 +105,9 @@ export interface FileRoutesByFullPath {
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
   '/industries': typeof IndustriesRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/services/business-website-development': typeof ServicesBusinessWebsiteDevelopmentRoute
   '/services/custom-software-development': typeof ServicesCustomSoftwareDevelopmentRoute
   '/services/mobile-app-development': typeof ServicesMobileAppDevelopmentRoute
@@ -107,7 +121,9 @@ export interface FileRoutesByTo {
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
   '/industries': typeof IndustriesRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/services/business-website-development': typeof ServicesBusinessWebsiteDevelopmentRoute
   '/services/custom-software-development': typeof ServicesCustomSoftwareDevelopmentRoute
   '/services/mobile-app-development': typeof ServicesMobileAppDevelopmentRoute
@@ -122,7 +138,9 @@ export interface FileRoutesById {
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
   '/industries': typeof IndustriesRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/services/business-website-development': typeof ServicesBusinessWebsiteDevelopmentRoute
   '/services/custom-software-development': typeof ServicesCustomSoftwareDevelopmentRoute
   '/services/mobile-app-development': typeof ServicesMobileAppDevelopmentRoute
@@ -138,7 +156,9 @@ export interface FileRouteTypes {
     | '/case-studies'
     | '/contact'
     | '/industries'
+    | '/privacy-policy'
     | '/sitemap.xml'
+    | '/terms-of-service'
     | '/services/business-website-development'
     | '/services/custom-software-development'
     | '/services/mobile-app-development'
@@ -152,7 +172,9 @@ export interface FileRouteTypes {
     | '/case-studies'
     | '/contact'
     | '/industries'
+    | '/privacy-policy'
     | '/sitemap.xml'
+    | '/terms-of-service'
     | '/services/business-website-development'
     | '/services/custom-software-development'
     | '/services/mobile-app-development'
@@ -166,7 +188,9 @@ export interface FileRouteTypes {
     | '/case-studies'
     | '/contact'
     | '/industries'
+    | '/privacy-policy'
     | '/sitemap.xml'
+    | '/terms-of-service'
     | '/services/business-website-development'
     | '/services/custom-software-development'
     | '/services/mobile-app-development'
@@ -181,7 +205,9 @@ export interface RootRouteChildren {
   CaseStudiesRoute: typeof CaseStudiesRoute
   ContactRoute: typeof ContactRoute
   IndustriesRoute: typeof IndustriesRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TermsOfServiceRoute: typeof TermsOfServiceRoute
   ServicesBusinessWebsiteDevelopmentRoute: typeof ServicesBusinessWebsiteDevelopmentRoute
   ServicesCustomSoftwareDevelopmentRoute: typeof ServicesCustomSoftwareDevelopmentRoute
   ServicesMobileAppDevelopmentRoute: typeof ServicesMobileAppDevelopmentRoute
@@ -192,11 +218,25 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms-of-service': {
+      id: '/terms-of-service'
+      path: '/terms-of-service'
+      fullPath: '/terms-of-service'
+      preLoaderRoute: typeof TermsOfServiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/industries': {
@@ -285,7 +325,9 @@ const rootRouteChildren: RootRouteChildren = {
   CaseStudiesRoute: CaseStudiesRoute,
   ContactRoute: ContactRoute,
   IndustriesRoute: IndustriesRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TermsOfServiceRoute: TermsOfServiceRoute,
   ServicesBusinessWebsiteDevelopmentRoute:
     ServicesBusinessWebsiteDevelopmentRoute,
   ServicesCustomSoftwareDevelopmentRoute:

@@ -23,8 +23,12 @@ export function Footer() {
               Helping Businesses Innovate, Scale & Stay Ahead with Intelligent Digital Solutions.
             </p>
             <div className="mt-5 flex gap-3">
-              {[Linkedin, Facebook, Instagram].map((Icon, i) => (
-                <a key={i} href="#" className="grid h-9 w-9 place-items-center rounded-md border border-white/15 text-white/80 hover:border-brand hover:text-brand transition-colors">
+              {[
+                { Icon: Linkedin, href: "https://www.linkedin.com/company/digitalyzetech/" },
+                { Icon: Facebook, href: "https://www.facebook.com/digitalyzetech/" },
+                { Icon: Instagram, href: "https://www.instagram.com/digitalyzetech/" },
+              ].map(({ Icon, href }, i) => (
+                <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="grid h-9 w-9 place-items-center rounded-md border border-white/15 text-white/80 hover:border-brand hover:text-brand transition-colors">
                   <Icon className="h-4 w-4" />
                 </a>
               ))}
@@ -82,8 +86,8 @@ export function Footer() {
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-white/70">© {new Date().getFullYear()} Digitalyze. All rights reserved.</p>
           <div className="flex gap-5 text-xs text-white/70">
-            <a href="#" className="hover:text-brand">Privacy Policy</a>
-            <a href="#" className="hover:text-brand">Terms of Service</a>
+            <Link to="/privacy-policy" className="hover:text-brand">Privacy Policy</Link>
+            <Link to="/terms-of-service" className="hover:text-brand">Terms of Service</Link>
           </div>
         </div>
       </div>
