@@ -8,9 +8,9 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About Digitalyze — Software Development Agency" },
-      { name: "description", content: "Learn about Digitalyze, our mission, and the team building software for startups and businesses." },
+      { name: "description", content: "Learn about Digitalyze, our mission, and our standards for building software for startups and businesses." },
       { property: "og:title", content: "About Digitalyze" },
-      { property: "og:description", content: "Meet the team building software that ships." },
+      { property: "og:description", content: "A team obsessed with shipping great products. Learn about our mission and standards." },
       { property: "og:url", content: "/about" },
     ],
     links: [{ rel: "canonical", href: "/about" }],
