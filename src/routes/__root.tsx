@@ -81,7 +81,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Digitalyze" },
       { property: "og:url", content: "https://digitalyze.tech" },
-      { property: "og:image", content: "https://digitalyze.tech/favicon.png" },
+      { property: "og:image", content: "/favicon.png" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#F26B21" },
     ],
