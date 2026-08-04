@@ -19,6 +19,9 @@ import project1 from "@/assets/project1.jpg";
 import project2 from "@/assets/project2.jpg";
 import project3 from "@/assets/project3.jpg";
 import project4 from "@/assets/project4.jpg";
+import project5 from "@/assets/project5.jpg";
+import project6 from "@/assets/project6.jpg";
+import project7 from "@/assets/project7.jpg";
 
 const heroDashboardImages = [
   heroDashboard1,
@@ -58,9 +61,9 @@ const steps = [
 
 const portfolio = [
   { name: "FinFlow", desc: "Personal finance app with 50k+ downloads.", tag: "Mobile App", image: project1 },
-  { name: "ClinicOS", desc: "Multi-tenant clinic management SaaS.", tag: "SaaS", image: project2 },
-  { name: "SalesPilot", desc: "Custom CRM for a 200-person sales org.", tag: "CRM", image: project3 },
-  { name: "MerchantHub", desc: "B2B marketplace MVP shipped in 8 weeks.", tag: "MVP", image: "/assets/project4.jpg" },
+  { name: "ClinicOS", desc: "Multi-tenant clinic management SaaS.", tag: "SaaS", image: project6 },
+  { name: "SalesPilot", desc: "Custom CRM for a 200-person sales org.", tag: "CRM", image: project5 },
+  { name: "MerchantHub", desc: "B2B marketplace MVP shipped in 8 weeks.", tag: "MVP", image: project7 },
 ];
 
 const testimonials = [
