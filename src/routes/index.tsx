@@ -657,7 +657,7 @@ function Home() {
             {portfolio.map((p, i) => (
               <Reveal key={p.name} delay={i * 0.08}>
                 <div className="group rounded-lg overflow-hidden bg-card border border-border card-hover">
-                  <div className="h-44 relative overflow-hidden">
+                  <div className="sm:h-44 h-60 relative overflow-hidden">
                     <img
                       src={p.image}
                       alt={p.name}
