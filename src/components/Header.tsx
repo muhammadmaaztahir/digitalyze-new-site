@@ -7,6 +7,12 @@ import {
 import logo from "@/assets/logoDark.png";
 
 const services = [
+   {
+    icon: Layout,
+    name: "Custom Website Development",
+    desc: "Professional, fast-loading and high-converting websites for businesses of all sizes.",
+    to: "/services/custom-website-development",
+  },
   {
     icon: Smartphone,
     name: "Mobile App Development",
@@ -43,12 +49,6 @@ const services = [
     desc: "Bespoke software built around your business logic.",
     to: "/services/custom-software-development",
   },
-  {
-    icon: Layout,
-    name: "Business Website Development",
-    desc: "Professional, fast-loading and high-converting websites for businesses of all sizes.",
-    to: "/services/business-website-development",
-  },
 ] as const;
 
 const techStack = ["React", "Next.js", "React Native", "Node.js", "Python", "PostgreSQL", "AWS", "TypeScript"];
@@ -57,6 +57,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -64,6 +65,11 @@ export function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Reset mobile services accordion whenever the mobile menu closes
+  useEffect(() => {
+    if (!open) setMobileServicesOpen(false);
+  }, [open]);
 
   return (
     <header
@@ -76,8 +82,10 @@ export function Header() {
           <Link to="/" className="flex items-center shrink-0 py-2">
             <img src={logo} alt="Digitalyze" className="h-7 w-auto" />
           </Link>
+          
 
           <nav className="hidden lg:flex items-center gap-8">
+             <Link to="/about" className="text-sm font-medium text-navy hover:text-brand transition-colors" activeProps={{ className: "text-brand" }}>About</Link>
             <Link to="/industries" className="text-sm font-medium text-navy hover:text-brand transition-colors" activeProps={{ className: "text-brand" }}>
               Industries
             </Link>
@@ -172,7 +180,7 @@ export function Header() {
             </div>
 
             <Link to="/case-studies" className="text-sm font-medium text-navy hover:text-brand transition-colors" activeProps={{ className: "text-brand" }}>Case Studies</Link>
-            <Link to="/about" className="text-sm font-medium text-navy hover:text-brand transition-colors" activeProps={{ className: "text-brand" }}>About</Link>
+           
             <Link to="/contact" className="text-sm font-medium text-navy hover:text-brand transition-colors" activeProps={{ className: "text-brand" }}>Contact</Link>
           </nav>
 
@@ -190,27 +198,62 @@ export function Header() {
             </Link> */}
           </div>
 
-          <button className="lg:hidden p-2 text-navy" onClick={() => setOpen(!open)} aria-label="Menu">
-            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          {/* MOBILE: phone number + hamburger */}
+          <div className="flex items-center gap-5 lg:hidden">
+            <a
+              href="tel:+923141305785"
+              className="flex items-center gap-1.5 text-[13px] sm:text-sm font-medium text-navy hover:text-brand transition-colors"
+            >
+              <Phone className="h-4 w-4 shrink-0" />
+              <span className="whitespace-nowrap">+92 314 1305785</span>
+            </a>
+            <button className="p-2 text-navy" onClick={() => setOpen(!open)} aria-label="Menu">
+              {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
       </div>
 
       {/* MOBILE MENU */}
       {open && (
         <div className="lg:hidden border-t border-white/10 bg-navy">
-          <div className="px-4 py-4 space-y-1">
+          <div className="px-4 py-4 pb-10 space-y-1">
+             <Link to="/about" onClick={() => setOpen(false)} className="block px-3 py-2 rounded-sm text-white/90 hover:bg-white/10">About</Link>
             <Link to="/industries" onClick={() => setOpen(false)} className="block px-3 py-2 rounded-sm text-white/90 hover:bg-white/10">Industries</Link>
-            <div className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-white/50">Services</div>
-            {services.map((s) => (
-              <Link key={s.to} to={s.to} onClick={() => setOpen(false)} className="block px-3 py-2 rounded-sm text-sm text-white/85 hover:bg-white/10">
-                {s.name}
-              </Link>
-            ))}
+
+            {/* Services — collapsible dropdown, mega-menu style with icons on the left */}
+            <div>
+              <button
+                onClick={() => setMobileServicesOpen((v) => !v)}
+                className="w-full flex items-center justify-between px-3 py-2 rounded-sm text-white/90 hover:bg-white/10 cursor-pointer"
+              >
+                <span>Services</span>
+                <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${mobileServicesOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {mobileServicesOpen && (
+                <div className="mt-1 mb-1 space-y-0.5 animate-in fade-in slide-in-from-top-2 duration-200">
+                  {services.map((s) => (
+                    <Link
+                      key={s.to}
+                      to={s.to}
+                      onClick={() => setOpen(false)}
+                      className="flex items-center gap-3 px-3 py-2.5 rounded-sm text-white/85 hover:bg-white/10 hover:text-white transition-colors"
+                    >
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-white/10 text-brand">
+                        <s.icon className="h-4 w-4" />
+                      </div>
+                      <span className="text-sm">{s.name}</span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
             <Link to="/case-studies" onClick={() => setOpen(false)} className="block px-3 py-2 rounded-sm text-white/90 hover:bg-white/10">Case Studies</Link>
-            <Link to="/about" onClick={() => setOpen(false)} className="block px-3 py-2 rounded-sm text-white/90 hover:bg-white/10">About</Link>
+           
             <Link to="/contact" onClick={() => setOpen(false)} className="block px-3 py-2 rounded-sm text-white/90 hover:bg-white/10">Contact</Link>
-            <Link to="/contact" onClick={() => setOpen(false)} className="block mt-2 rounded-md bg-brand px-5 py-2.5 text-center text-sm font-semibold text-brand-foreground">Get a Free Quote</Link>
+            <Link to="/contact" onClick={() => setOpen(false)} className="block mt-10 rounded-md bg-brand px-5 py-2.5 text-center text-sm font-semibold text-brand-foreground">Get a Free Quote</Link>
           </div>
         </div>
       )}

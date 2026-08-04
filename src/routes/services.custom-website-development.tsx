@@ -23,13 +23,13 @@ import {
 import { Reveal } from "@/components/Reveal";
 import { SiteLayout } from "@/components/SiteLayout";
 
-export const Route = createFileRoute("/services/business-website-development")(
+export const Route = createFileRoute("/services/custom-website-development")(
   {
     head: () => ({
       meta: [
         {
           title:
-            "Business Website Development — WordPress, Shopify, Webflow & More | Digitalyze",
+            "Custom Website Development — WordPress, Shopify, Webflow & More | Digitalyze",
         },
         {
           name: "description",
@@ -39,7 +39,7 @@ export const Route = createFileRoute("/services/business-website-development")(
         {
           property: "og:title",
           content:
-            "Business Website Development — WordPress, Shopify, Webflow & More | Digitalyze",
+            "Custom Website Development — WordPress, Shopify, Webflow & More | Digitalyze",
         },
         {
           property: "og:description",
@@ -52,7 +52,7 @@ export const Route = createFileRoute("/services/business-website-development")(
       links: [
         {
           rel: "canonical",
-          href: "/services/business-website-development",
+          href: "/services/custom-website-development",
         },
       ],
     }),
@@ -334,7 +334,7 @@ function BusinessWebsiteLanding() {
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-12 items-center">
             <div>
               <span className="inline-block rounded-md bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand">
-                Business Website Development
+                Custom Website Development
               </span>
               <h1 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-navy leading-[1.05]">
                 Websites That{" "}

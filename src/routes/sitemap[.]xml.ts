@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import type {} from "@tanstack/react-start";
+import type { } from "@tanstack/react-start";
 
 const BASE_URL = "https://digitalyze.tech";
 
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/services/custom-crm-development", priority: "0.9", changefreq: "monthly" },
           { path: "/services/mvp-development", priority: "0.9", changefreq: "monthly" },
           { path: "/services/custom-software-development", priority: "0.9", changefreq: "monthly" },
-          { path: "/services/business-website-development", priority: "0.9", changefreq: "monthly" },
+          { path: "/services/custom-website-development", priority: "0.9", changefreq: "monthly" },
           { path: "/privacy-policy", priority: "0.5", changefreq: "yearly" },
           { path: "/terms-of-service", priority: "0.5", changefreq: "yearly" },
         ];

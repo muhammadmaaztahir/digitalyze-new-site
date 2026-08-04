@@ -15,6 +15,10 @@ import heroDashboard2 from "@/assets/heroDashboard2.png";
 import heroDashboard3 from "@/assets/heroDashboard3.png";
 import heroDashboard4 from "@/assets/heroDashboard4.png";
 import heroDashboard5 from "@/assets/heroDashboard5.png";
+import project1 from "@/assets/project1.jpg";
+import project2 from "@/assets/project2.jpg";
+import project3 from "@/assets/project3.jpg";
+import project4 from "@/assets/project4.jpg";
 
 const heroDashboardImages = [
   heroDashboard1,
@@ -29,13 +33,13 @@ export const Route = createFileRoute("/")({
 });
 
 const services = [
+  { icon: Layout, name: "Custom Website Development", desc: "Professional, fast-loading and high-converting websites for businesses of all sizes.", to: "/services/custom-website-development" },
   { icon: Smartphone, name: "Mobile App Development", desc: "Native and cross-platform apps for iOS and Android that users love.", to: "/services/mobile-app-development" },
   { icon: Globe, name: "Web App Development", desc: "Scalable, fast web applications built with modern frameworks.", to: "/services/web-app-development" },
   { icon: Cloud, name: "SaaS Development", desc: "End-to-end SaaS platforms with billing, auth and multi-tenancy.", to: "/services/saas-development" },
   { icon: Users, name: "Custom CRM Development", desc: "Tailored CRMs that fit your sales and operations perfectly.", to: "/services/custom-crm-development" },
   { icon: Rocket, name: "MVP Development", desc: "Ship your MVP in weeks — validate fast, iterate faster.", to: "/services/mvp-development" },
   { icon: Code2, name: "Custom Software Development", desc: "Bespoke software built exactly around your business logic.", to: "/services/custom-software-development" },
-  { icon: Layout, name: "Business Website Development", desc: "Professional, fast-loading and high-converting websites for businesses of all sizes.", to: "/services/business-website-development" },
 ] as const;
 
 const values = [
@@ -53,10 +57,10 @@ const steps = [
 ];
 
 const portfolio = [
-  { name: "FinFlow", desc: "Personal finance app with 50k+ downloads.", tag: "Mobile App", gradient: "from-orange-400 to-pink-500" },
-  { name: "ClinicOS", desc: "Multi-tenant clinic management SaaS.", tag: "SaaS", gradient: "from-blue-400 to-indigo-600" },
-  { name: "SalesPilot", desc: "Custom CRM for a 200-person sales org.", tag: "CRM", gradient: "from-emerald-400 to-teal-600" },
-  { name: "MerchantHub", desc: "B2B marketplace MVP shipped in 8 weeks.", tag: "MVP", gradient: "from-amber-400 to-rose-500" },
+  { name: "FinFlow", desc: "Personal finance app with 50k+ downloads.", tag: "Mobile App", image: project1 },
+  { name: "ClinicOS", desc: "Multi-tenant clinic management SaaS.", tag: "SaaS", image: project2 },
+  { name: "SalesPilot", desc: "Custom CRM for a 200-person sales org.", tag: "CRM", image: project3 },
+  { name: "MerchantHub", desc: "B2B marketplace MVP shipped in 8 weeks.", tag: "MVP", image: "/assets/project4.jpg" },
 ];
 
 const testimonials = [
@@ -173,7 +177,18 @@ function FAQItem({ q, a, defaultOpen = false }: { q: string; a: string; defaultO
 }
 
 function TestimonialsCarousel() {
-  const VISIBLE = 3;
+  const [visible, setVisible] = useState(3);
+
+  useEffect(() => {
+    const updateVisible = () => {
+      setVisible(window.innerWidth < 640 ? 1 : 3);
+    };
+    updateVisible();
+    window.addEventListener("resize", updateVisible);
+    return () => window.removeEventListener("resize", updateVisible);
+  }, []);
+
+  const VISIBLE = visible;
   const count = testimonials.length;
 
   // Infinite loop: clone VISIBLE items at start & end
@@ -187,6 +202,14 @@ function TestimonialsCarousel() {
   const [idx, setIdx] = useState(VISIBLE);
   const [animate, setAnimate] = useState(true);
   const [paused, setPaused] = useState(false);
+
+  // Reset idx whenever VISIBLE changes (e.g. resize crosses breakpoint)
+  useEffect(() => {
+    setAnimate(false);
+    setIdx(VISIBLE);
+    const t = setTimeout(() => setAnimate(true), 20);
+    return () => clearTimeout(t);
+  }, [VISIBLE]);
 
   // Which real testimonial is the "first" visible one
   const realIdx = ((idx - VISIBLE) % count + count) % count;
@@ -227,7 +250,42 @@ function TestimonialsCarousel() {
     setTimeout(() => setPaused(false), 6000);
   };
 
-  const pct = 100 / VISIBLE; // each card = 33.33%
+  // --- Swipe handling (touch) ---
+  const touchStartX = useRef(0);
+  const touchDeltaX = useRef(0);
+  const isSwiping = useRef(false);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchDeltaX.current = 0;
+    isSwiping.current = true;
+    setPaused(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isSwiping.current) return;
+    touchDeltaX.current = e.touches[0].clientX - touchStartX.current;
+  };
+
+  const handleTouchEnd = () => {
+    if (!isSwiping.current) return;
+    isSwiping.current = false;
+
+    const threshold = 40; // px needed to count as a swipe
+    if (touchDeltaX.current < -threshold) {
+      // swiped left -> next
+      setAnimate(true);
+      setIdx((i) => i + 1);
+    } else if (touchDeltaX.current > threshold) {
+      // swiped right -> prev
+      setAnimate(true);
+      setIdx((i) => i - 1);
+    }
+    touchDeltaX.current = 0;
+    setTimeout(() => setPaused(false), 3000);
+  };
+
+  const pct = 100 / VISIBLE; // each card = 33.33% on desktop, 100% on mobile
   const translateX = -(idx * pct);
 
   return (
@@ -243,9 +301,12 @@ function TestimonialsCarousel() {
 
       {/* Track container */}
       <div
-        className="mt-6 overflow-hidden"
+        className="mt-6 overflow-hidden touch-pan-y"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         <div
           style={{
@@ -261,19 +322,19 @@ function TestimonialsCarousel() {
               style={{ minWidth: `${pct}%`, maxWidth: `${pct}%` }}
               className="px-3 box-border py-10"
             >
-              <div className="h-full rounded-lg border border-border bg-card p-7 card-hover">
+              <div className="h-full rounded-lg border border-border bg-card p-5 sm:p-7 card-hover">
                 <div className="flex gap-1 text-brand">
                   {Array.from({ length: 5 }).map((_, j) => (
                     <Star key={j} className="h-4 w-4 fill-current" />
                   ))}
                 </div>
-                <p className="mt-4 text-navy leading-relaxed">"{t.quote}"</p>
+                <p className="mt-4 text-sm sm:text-base text-navy leading-relaxed">"{t.quote}"</p>
                 <div className="mt-6 flex items-center gap-3">
                   {/* <div className="grid h-11 w-11 place-items-center rounded-md bg-gradient-to-br from-brand to-navy text-white font-bold text-lg shrink-0">
                     {t.name.charAt(0)}
                   </div> */}
                   <div>
-                    <div className="font-semibold text-navy text-sm">{t.name}</div>
+                    <div className="font-semibold text-navy text-xs sm:text-sm">{t.name}</div>
                     <div className="text-xs text-muted-foreground">{t.role}</div>
                   </div>
                 </div>
@@ -301,37 +362,94 @@ function TestimonialsCarousel() {
 
 function HeroDashboardCarousel() {
   const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState(1); // 1 = next (from right), -1 = prev (from left)
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
+    if (paused) return;
     const interval = setInterval(() => {
+      setDirection(1);
       setIndex((prev) => (prev + 1) % heroDashboardImages.length);
     }, 4500);
     return () => clearInterval(interval);
-  }, []);
+  }, [paused]);
+
+  // --- Swipe / drag handling (works for touch AND mouse via Pointer Events) ---
+  const dragStartX = useRef(0);
+  const dragDeltaX = useRef(0);
+  const isDragging = useRef(false);
+
+  const goNext = () => {
+    setDirection(1);
+    setIndex((prev) => (prev + 1) % heroDashboardImages.length);
+  };
+  const goPrev = () => {
+    setDirection(-1);
+    setIndex((prev) => (prev - 1 + heroDashboardImages.length) % heroDashboardImages.length);
+  };
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    isDragging.current = true;
+    dragStartX.current = e.clientX;
+    dragDeltaX.current = 0;
+    setPaused(true);
+    (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!isDragging.current) return;
+    dragDeltaX.current = e.clientX - dragStartX.current;
+  };
+
+  const handlePointerUp = () => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+
+    const threshold = 40; // px needed to count as a swipe
+    if (dragDeltaX.current < -threshold) {
+      // swiped left -> next, new image enters from right
+      goNext();
+    } else if (dragDeltaX.current > threshold) {
+      // swiped right -> prev, new image enters from left
+      goPrev();
+    }
+    dragDeltaX.current = 0;
+    setTimeout(() => setPaused(false), 3000);
+  };
 
   return (
-    <div className="relative w-full max-w-lg lg:max-w-full flex items-center justify-center overflow-visible">
+    <div
+      className="relative w-full max-w-lg lg:max-w-full flex items-center justify-center overflow-visible touch-pan-y select-none"
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerUp}
+      onPointerLeave={handlePointerUp}
+    >
       {/* Invisible placeholder image to reserve aspect ratio & height dynamically */}
       <img
         src={heroDashboardImages[0]}
         className="w-full h-auto object-contain opacity-0 pointer-events-none"
         aria-hidden="true"
         alt=""
+        draggable={false}
       />
-      
-      <AnimatePresence initial={false}>
+
+      <AnimatePresence initial={false} custom={direction}>
         <motion.img
           key={index}
           src={heroDashboardImages[index]}
-          initial={{ opacity: 0, x: 80 }}
+          custom={direction}
+          initial={(dir: number) => ({ opacity: 0, x: dir === 1 ? 80 : -80 })}
           animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -80 }}
+          exit={(dir: number) => ({ opacity: 0, x: dir === 1 ? -80 : 80 })}
           transition={{
             x: { type: "spring", stiffness: 100, damping: 20 },
             opacity: { duration: 0.4 }
           }}
-          className="absolute inset-0 w-full h-full object-contain drop-shadow-2xl"
+          className="absolute inset-0 w-full h-full object-contain drop-shadow-2xl pointer-events-none"
           alt={`Dashboard view ${index + 1}`}
+          draggable={false}
         />
       </AnimatePresence>
     </div>
@@ -501,7 +619,7 @@ function Home() {
             <h2 className="mt-4 text-3xl md:text-5xl font-extrabold text-navy">A simple, proven 4-step process</h2>
           </div>
         </Reveal>
-        <div className="mt-14 relative grid gap-6 md:grid-cols-4">
+        <div className="mt-14 relative grid sm:gap-6 gap-15  md:grid-cols-4">
           <div className="hidden md:block absolute top-8 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-brand/20 via-brand to-brand/20" />
           {steps.map((s, i) => (
             <Reveal key={s.title} delay={i * 0.1}>
@@ -536,10 +654,12 @@ function Home() {
             {portfolio.map((p, i) => (
               <Reveal key={p.name} delay={i * 0.08}>
                 <div className="group rounded-lg overflow-hidden bg-card border border-border card-hover">
-                  <div className={`h-44 bg-gradient-to-br ${p.gradient} relative`}>
-                    <div className="absolute inset-0 flex items-center justify-center text-white text-3xl font-black opacity-90">
-                      {p.name.charAt(0)}
-                    </div>
+                  <div className="h-44 relative overflow-hidden">
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
                   </div>
                   <div className="p-5">
                     <span className="text-xs font-semibold uppercase tracking-wider text-brand">{p.tag}</span>

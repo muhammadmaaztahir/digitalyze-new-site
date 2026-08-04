@@ -3,6 +3,10 @@ import { SiteLayout } from "@/components/SiteLayout";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { ArrowRight } from "lucide-react";
+import project1 from "@/assets/project1.jpg";
+import project2 from "@/assets/project2.jpg";
+import project3 from "@/assets/project3.jpg";
+
 
 export const Route = createFileRoute("/case-studies")({
   head: () => ({
@@ -19,12 +23,12 @@ export const Route = createFileRoute("/case-studies")({
 });
 
 const projects = [
-  { name: "FinFlow", desc: "Personal finance app with 50k+ downloads.", tag: "Mobile App", gradient: "from-orange-400 to-pink-500" },
-  { name: "ClinicOS", desc: "Multi-tenant clinic management SaaS.", tag: "SaaS", gradient: "from-blue-400 to-indigo-600" },
-  { name: "SalesPilot", desc: "Custom CRM for a 200-person sales org.", tag: "CRM", gradient: "from-emerald-400 to-teal-600" },
-  { name: "MerchantHub", desc: "B2B marketplace MVP shipped in 8 weeks.", tag: "MVP", gradient: "from-amber-400 to-rose-500" },
-  { name: "FleetLink", desc: "Real-time fleet tracking web app.", tag: "Web App", gradient: "from-sky-400 to-cyan-600" },
-  { name: "InvoicePro", desc: "Custom invoicing software for accountants.", tag: "Custom Software", gradient: "from-violet-400 to-fuchsia-600" },
+  { name: "FinFlow", desc: "Personal finance app with 50k+ downloads.", tag: "Mobile App", image: project1 },
+  { name: "ClinicOS", desc: "Multi-tenant clinic management SaaS.", tag: "SaaS", image: project2 },
+  { name: "SalesPilot", desc: "Custom CRM for a 200-person sales org.", tag: "CRM", image: project3 },
+  { name: "MerchantHub", desc: "B2B marketplace MVP shipped in 8 weeks.", tag: "MVP", image: project3 },
+  { name: "FleetLink", desc: "Real-time fleet tracking web app.", tag: "Web App", image: project1 },
+  { name: "InvoicePro", desc: "Custom invoicing software for accountants.", tag: "Custom Software", image: project1 },
 ];
 
 function WorkPage() {
@@ -36,10 +40,13 @@ function WorkPage() {
           {projects.map((p, i) => (
             <Reveal key={p.name} delay={i * 0.05}>
               <div className="group rounded-lg overflow-hidden bg-card border border-border card-hover h-full">
-                <div className={`h-52 bg-gradient-to-br ${p.gradient} relative`}>
-                  <div className="absolute inset-0 flex items-center justify-center text-white text-5xl font-black opacity-90">
-                    {p.name.charAt(0)}
-                  </div>
+
+                <div className={`h-60`}>
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                 </div>
                 <div className="p-6">
                   <span className="text-xs font-semibold uppercase tracking-wider text-brand">{p.tag}</span>

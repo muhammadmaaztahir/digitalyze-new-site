@@ -21,8 +21,9 @@ import { Route as ServicesWebAppDevelopmentRouteImport } from './routes/services
 import { Route as ServicesSaasDevelopmentRouteImport } from './routes/services.saas-development'
 import { Route as ServicesMvpDevelopmentRouteImport } from './routes/services.mvp-development'
 import { Route as ServicesMobileAppDevelopmentRouteImport } from './routes/services.mobile-app-development'
+import { Route as ServicesCustomWebsiteDevelopmentRouteImport } from './routes/services.custom-website-development'
 import { Route as ServicesCustomSoftwareDevelopmentRouteImport } from './routes/services.custom-software-development'
-import { Route as ServicesBusinessWebsiteDevelopmentRouteImport } from './routes/services.business-website-development'
+import { Route as ApiSendEmailRouteImport } from './routes/api.send-email'
 
 const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
   id: '/terms-of-service',
@@ -86,18 +87,23 @@ const ServicesMobileAppDevelopmentRoute =
     path: '/services/mobile-app-development',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ServicesCustomWebsiteDevelopmentRoute =
+  ServicesCustomWebsiteDevelopmentRouteImport.update({
+    id: '/services/custom-website-development',
+    path: '/services/custom-website-development',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ServicesCustomSoftwareDevelopmentRoute =
   ServicesCustomSoftwareDevelopmentRouteImport.update({
     id: '/services/custom-software-development',
     path: '/services/custom-software-development',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ServicesBusinessWebsiteDevelopmentRoute =
-  ServicesBusinessWebsiteDevelopmentRouteImport.update({
-    id: '/services/business-website-development',
-    path: '/services/business-website-development',
-    getParentRoute: () => rootRouteImport,
-  } as any)
+const ApiSendEmailRoute = ApiSendEmailRouteImport.update({
+  id: '/api/send-email',
+  path: '/api/send-email',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -108,8 +114,9 @@ export interface FileRoutesByFullPath {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-of-service': typeof TermsOfServiceRoute
-  '/services/business-website-development': typeof ServicesBusinessWebsiteDevelopmentRoute
+  '/api/send-email': typeof ApiSendEmailRoute
   '/services/custom-software-development': typeof ServicesCustomSoftwareDevelopmentRoute
+  '/services/custom-website-development': typeof ServicesCustomWebsiteDevelopmentRoute
   '/services/mobile-app-development': typeof ServicesMobileAppDevelopmentRoute
   '/services/mvp-development': typeof ServicesMvpDevelopmentRoute
   '/services/saas-development': typeof ServicesSaasDevelopmentRoute
@@ -124,8 +131,9 @@ export interface FileRoutesByTo {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-of-service': typeof TermsOfServiceRoute
-  '/services/business-website-development': typeof ServicesBusinessWebsiteDevelopmentRoute
+  '/api/send-email': typeof ApiSendEmailRoute
   '/services/custom-software-development': typeof ServicesCustomSoftwareDevelopmentRoute
+  '/services/custom-website-development': typeof ServicesCustomWebsiteDevelopmentRoute
   '/services/mobile-app-development': typeof ServicesMobileAppDevelopmentRoute
   '/services/mvp-development': typeof ServicesMvpDevelopmentRoute
   '/services/saas-development': typeof ServicesSaasDevelopmentRoute
@@ -141,8 +149,9 @@ export interface FileRoutesById {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-of-service': typeof TermsOfServiceRoute
-  '/services/business-website-development': typeof ServicesBusinessWebsiteDevelopmentRoute
+  '/api/send-email': typeof ApiSendEmailRoute
   '/services/custom-software-development': typeof ServicesCustomSoftwareDevelopmentRoute
+  '/services/custom-website-development': typeof ServicesCustomWebsiteDevelopmentRoute
   '/services/mobile-app-development': typeof ServicesMobileAppDevelopmentRoute
   '/services/mvp-development': typeof ServicesMvpDevelopmentRoute
   '/services/saas-development': typeof ServicesSaasDevelopmentRoute
@@ -159,8 +168,9 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/sitemap.xml'
     | '/terms-of-service'
-    | '/services/business-website-development'
+    | '/api/send-email'
     | '/services/custom-software-development'
+    | '/services/custom-website-development'
     | '/services/mobile-app-development'
     | '/services/mvp-development'
     | '/services/saas-development'
@@ -175,8 +185,9 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/sitemap.xml'
     | '/terms-of-service'
-    | '/services/business-website-development'
+    | '/api/send-email'
     | '/services/custom-software-development'
+    | '/services/custom-website-development'
     | '/services/mobile-app-development'
     | '/services/mvp-development'
     | '/services/saas-development'
@@ -191,8 +202,9 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/sitemap.xml'
     | '/terms-of-service'
-    | '/services/business-website-development'
+    | '/api/send-email'
     | '/services/custom-software-development'
+    | '/services/custom-website-development'
     | '/services/mobile-app-development'
     | '/services/mvp-development'
     | '/services/saas-development'
@@ -208,8 +220,9 @@ export interface RootRouteChildren {
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsOfServiceRoute: typeof TermsOfServiceRoute
-  ServicesBusinessWebsiteDevelopmentRoute: typeof ServicesBusinessWebsiteDevelopmentRoute
+  ApiSendEmailRoute: typeof ApiSendEmailRoute
   ServicesCustomSoftwareDevelopmentRoute: typeof ServicesCustomSoftwareDevelopmentRoute
+  ServicesCustomWebsiteDevelopmentRoute: typeof ServicesCustomWebsiteDevelopmentRoute
   ServicesMobileAppDevelopmentRoute: typeof ServicesMobileAppDevelopmentRoute
   ServicesMvpDevelopmentRoute: typeof ServicesMvpDevelopmentRoute
   ServicesSaasDevelopmentRoute: typeof ServicesSaasDevelopmentRoute
@@ -302,6 +315,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesMobileAppDevelopmentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/custom-website-development': {
+      id: '/services/custom-website-development'
+      path: '/services/custom-website-development'
+      fullPath: '/services/custom-website-development'
+      preLoaderRoute: typeof ServicesCustomWebsiteDevelopmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/custom-software-development': {
       id: '/services/custom-software-development'
       path: '/services/custom-software-development'
@@ -309,11 +329,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesCustomSoftwareDevelopmentRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/business-website-development': {
-      id: '/services/business-website-development'
-      path: '/services/business-website-development'
-      fullPath: '/services/business-website-development'
-      preLoaderRoute: typeof ServicesBusinessWebsiteDevelopmentRouteImport
+    '/api/send-email': {
+      id: '/api/send-email'
+      path: '/api/send-email'
+      fullPath: '/api/send-email'
+      preLoaderRoute: typeof ApiSendEmailRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -328,10 +348,10 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsOfServiceRoute: TermsOfServiceRoute,
-  ServicesBusinessWebsiteDevelopmentRoute:
-    ServicesBusinessWebsiteDevelopmentRoute,
+  ApiSendEmailRoute: ApiSendEmailRoute,
   ServicesCustomSoftwareDevelopmentRoute:
     ServicesCustomSoftwareDevelopmentRoute,
+  ServicesCustomWebsiteDevelopmentRoute: ServicesCustomWebsiteDevelopmentRoute,
   ServicesMobileAppDevelopmentRoute: ServicesMobileAppDevelopmentRoute,
   ServicesMvpDevelopmentRoute: ServicesMvpDevelopmentRoute,
   ServicesSaasDevelopmentRoute: ServicesSaasDevelopmentRoute,

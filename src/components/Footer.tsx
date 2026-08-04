@@ -3,13 +3,13 @@ import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram, Facebook } from "luc
 import logo from "@/assets/logoLight.png";
 
 const services = [
+  { name: "Custom Website Development", to: "/services/custom-website-development" },
   { name: "Mobile App Development", to: "/services/mobile-app-development" },
   { name: "Web App Development", to: "/services/web-app-development" },
   { name: "SaaS Development", to: "/services/saas-development" },
   { name: "Custom CRM Development", to: "/services/custom-crm-development" },
   { name: "MVP Development", to: "/services/mvp-development" },
   { name: "Custom Software Development", to: "/services/custom-software-development" },
-  { name: "Business Website Development", to: "/services/business-website-development" },
 ] as const;
 
 export function Footer() {
