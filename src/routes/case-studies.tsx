@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import project1 from "@/assets/project1.jpg";
 import project2 from "@/assets/project2.jpg";
 import project3 from "@/assets/project3.jpg";
@@ -27,13 +27,13 @@ export const Route = createFileRoute("/case-studies")({
 });
 
 const projects = [
-  { name: "FinFlow", desc: "Personal finance app with 50k+ downloads.", tag: "Mobile App", image: project1 },
-  { name: "ClinicOS", desc: "Multi-tenant clinic management SaaS.", tag: "SaaS", image: project6 },
-  { name: "SalesPilot", desc: "Custom CRM for a 200-person sales org.", tag: "CRM", image: project4 },
-  { name: "MerchantHub", desc: "B2B marketplace MVP shipped in 8 weeks.", tag: "MVP", image: project2 },
-  { name: "FleetLink", desc: "Real-time fleet tracking web app.", tag: "Web App", image: project5 },
-  { name: "InvoicePro", desc: "Custom invoicing software for accountants.", tag: "Custom Software", image: project7 },
-  { name: "InvoicePro", desc: "Custom invoicing software for accountants.", tag: "Custom Software", image: project3 },
+  { name: "FinFlow", desc: "Personal finance app with 50k+ downloads.", tag: "Mobile App", image: project1, website: "https://innovationsapplied.com/" },
+  { name: "ClinicOS", desc: "Multi-tenant clinic management SaaS.", tag: "SaaS", image: project6, website: "http://learning-hub-lms.vercel.app/" },
+  { name: "SalesPilot", desc: "Custom CRM for a 200-person sales org.", tag: "CRM", image: project4, website: "https://truerefinedsolutions.com/" },
+  { name: "MerchantHub", desc: "B2B marketplace MVP shipped in 8 weeks.", tag: "MVP", image: project2, website: "https://scentyque.pk/" },
+  { name: "FleetLink", desc: "Real-time fleet tracking web app.", tag: "Web App", image: project5, website: "https://mobirays.com/" },
+  { name: "InvoicePro", desc: "Custom invoicing software for accountants.", tag: "Custom Software", image: project7, website: "https://tradeflow.digitalyze.tech/" },
+  { name: "InvoicePro", desc: "Custom invoicing software for accountants.", tag: "Custom Software", image: project3, website: "https://alsaudipak.com/" },
 ];
 
 function WorkPage() {
@@ -57,9 +57,21 @@ function WorkPage() {
                   <span className="text-xs font-semibold uppercase tracking-wider text-brand">{p.tag}</span>
                   <h3 className="mt-2 text-xl font-bold text-navy">{p.name}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{p.desc}</p>
-                  <a href="#" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-navy group-hover:text-brand transition-colors">
-                    View Case Study <ArrowRight className="h-4 w-4" />
-                  </a>
+                 
+                  <div className="mt-10 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+                      <a href="#" className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy group-hover:text-brand transition-colors">
+                        View Case Study <ArrowRight className="h-4 w-4" />
+                      </a>
+                      <a
+                        href={p.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-navy transition-colors"
+                      >
+                        Visit Website <ExternalLink className="h-4 w-4" />
+                      </a>
+                    </div>
                 </div>
               </div>
             </Reveal>

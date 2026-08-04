@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import {
   ArrowRight, Smartphone, Globe, Cloud, Users, Rocket, Code2, Layout,
   Zap, DollarSign, UserCheck, LifeBuoy, Search, Palette, Wrench, Send,
-  Star, Plus, Minus, ChevronLeft, ChevronRight,
+  Star, Plus, Minus, ChevronLeft, ChevronRight, ExternalLink
 } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Reveal } from "@/components/Reveal";
@@ -60,10 +60,10 @@ const steps = [
 ];
 
 const portfolio = [
-  { name: "FinFlow", desc: "Personal finance app with 50k+ downloads.", tag: "Mobile App", image: project1 },
-  { name: "ClinicOS", desc: "Multi-tenant clinic management SaaS.", tag: "SaaS", image: project6 },
-  { name: "SalesPilot", desc: "Custom CRM for a 200-person sales org.", tag: "CRM", image: project5 },
-  { name: "MerchantHub", desc: "B2B marketplace MVP shipped in 8 weeks.", tag: "MVP", image: project7 },
+  { name: "FinFlow", desc: "Personal finance app with 50k+ downloads.", tag: "Mobile App", image: project1, website: "https://innovationsapplied.com/" },
+  { name: "ClinicOS", desc: "Multi-tenant clinic management SaaS.", tag: "SaaS", image: project6, website: "http://learning-hub-lms.vercel.app/" },
+  { name: "SalesPilot", desc: "Custom CRM for a 200-person sales org.", tag: "CRM", image: project5, website: "https://mobirays.com/" },
+  { name: "MerchantHub", desc: "B2B marketplace MVP shipped in 8 weeks.", tag: "MVP", image: project7, website: "https://tradeflow.digitalyze.tech/" },
 ];
 
 const testimonials = [
@@ -668,9 +668,20 @@ function Home() {
                     <span className="text-xs font-semibold uppercase tracking-wider text-brand">{p.tag}</span>
                     <h3 className="mt-2 text-lg font-bold text-navy">{p.name}</h3>
                     <p className="mt-1 text-sm text-muted-foreground">{p.desc}</p>
-                    <a href="#" className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-navy group-hover:text-brand transition-colors">
-                      View Case Study <ArrowRight className="h-4 w-4" />
-                    </a>
+                    <div className="mt-7 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
+                      <a href="#" className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy group-hover:text-brand transition-colors">
+                        View Case Study <ArrowRight className="h-4 w-4" />
+                      </a>
+                      <a
+                        href={p.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-navy transition-colors"
+                      >
+                        Visit Website <ExternalLink className="h-4 w-4" />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </Reveal>
