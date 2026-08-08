@@ -1,0 +1,2 @@
+﻿src/routes/index.tsx(452,19): error TS2322: Type '(dir: number) => { opacity: number; x: number; }' is not assignable to type 'boolean | TargetAndTransition | VariantLabels | undefined'.
+src/routes/index.tsx(454,16): error TS2322: Type '(dir: number) => { opacity: number; x: number; }' is not assignable to type 'TargetAndTransition | VariantLabels | undefined'.

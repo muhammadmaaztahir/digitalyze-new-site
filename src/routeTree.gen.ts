@@ -17,12 +17,14 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CaseStudiesRouteImport } from './routes/case-studies'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CaseStudiesIndexRouteImport } from './routes/case-studies.index'
 import { Route as ServicesWebAppDevelopmentRouteImport } from './routes/services.web-app-development'
 import { Route as ServicesSaasDevelopmentRouteImport } from './routes/services.saas-development'
 import { Route as ServicesMvpDevelopmentRouteImport } from './routes/services.mvp-development'
 import { Route as ServicesMobileAppDevelopmentRouteImport } from './routes/services.mobile-app-development'
 import { Route as ServicesCustomWebsiteDevelopmentRouteImport } from './routes/services.custom-website-development'
 import { Route as ServicesCustomSoftwareDevelopmentRouteImport } from './routes/services.custom-software-development'
+import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug'
 import { Route as ApiSendEmailRouteImport } from './routes/api.send-email'
 
 const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
@@ -65,6 +67,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CaseStudiesIndexRoute = CaseStudiesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CaseStudiesRoute,
+} as any)
 const ServicesWebAppDevelopmentRoute =
   ServicesWebAppDevelopmentRouteImport.update({
     id: '/services/web-app-development',
@@ -99,6 +106,11 @@ const ServicesCustomSoftwareDevelopmentRoute =
     path: '/services/custom-software-development',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CaseStudiesSlugRoute = CaseStudiesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => CaseStudiesRoute,
+} as any)
 const ApiSendEmailRoute = ApiSendEmailRouteImport.update({
   id: '/api/send-email',
   path: '/api/send-email',
@@ -108,54 +120,59 @@ const ApiSendEmailRoute = ApiSendEmailRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/case-studies': typeof CaseStudiesRoute
+  '/case-studies': typeof CaseStudiesRouteWithChildren
   '/contact': typeof ContactRoute
   '/industries': typeof IndustriesRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/api/send-email': typeof ApiSendEmailRoute
+  '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/services/custom-software-development': typeof ServicesCustomSoftwareDevelopmentRoute
   '/services/custom-website-development': typeof ServicesCustomWebsiteDevelopmentRoute
   '/services/mobile-app-development': typeof ServicesMobileAppDevelopmentRoute
   '/services/mvp-development': typeof ServicesMvpDevelopmentRoute
   '/services/saas-development': typeof ServicesSaasDevelopmentRoute
   '/services/web-app-development': typeof ServicesWebAppDevelopmentRoute
+  '/case-studies/': typeof CaseStudiesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
   '/industries': typeof IndustriesRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/api/send-email': typeof ApiSendEmailRoute
+  '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/services/custom-software-development': typeof ServicesCustomSoftwareDevelopmentRoute
   '/services/custom-website-development': typeof ServicesCustomWebsiteDevelopmentRoute
   '/services/mobile-app-development': typeof ServicesMobileAppDevelopmentRoute
   '/services/mvp-development': typeof ServicesMvpDevelopmentRoute
   '/services/saas-development': typeof ServicesSaasDevelopmentRoute
   '/services/web-app-development': typeof ServicesWebAppDevelopmentRoute
+  '/case-studies': typeof CaseStudiesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/case-studies': typeof CaseStudiesRoute
+  '/case-studies': typeof CaseStudiesRouteWithChildren
   '/contact': typeof ContactRoute
   '/industries': typeof IndustriesRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/api/send-email': typeof ApiSendEmailRoute
+  '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/services/custom-software-development': typeof ServicesCustomSoftwareDevelopmentRoute
   '/services/custom-website-development': typeof ServicesCustomWebsiteDevelopmentRoute
   '/services/mobile-app-development': typeof ServicesMobileAppDevelopmentRoute
   '/services/mvp-development': typeof ServicesMvpDevelopmentRoute
   '/services/saas-development': typeof ServicesSaasDevelopmentRoute
   '/services/web-app-development': typeof ServicesWebAppDevelopmentRoute
+  '/case-studies/': typeof CaseStudiesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -169,29 +186,32 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms-of-service'
     | '/api/send-email'
+    | '/case-studies/$slug'
     | '/services/custom-software-development'
     | '/services/custom-website-development'
     | '/services/mobile-app-development'
     | '/services/mvp-development'
     | '/services/saas-development'
     | '/services/web-app-development'
+    | '/case-studies/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/case-studies'
     | '/contact'
     | '/industries'
     | '/privacy-policy'
     | '/sitemap.xml'
     | '/terms-of-service'
     | '/api/send-email'
+    | '/case-studies/$slug'
     | '/services/custom-software-development'
     | '/services/custom-website-development'
     | '/services/mobile-app-development'
     | '/services/mvp-development'
     | '/services/saas-development'
     | '/services/web-app-development'
+    | '/case-studies'
   id:
     | '__root__'
     | '/'
@@ -203,18 +223,20 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms-of-service'
     | '/api/send-email'
+    | '/case-studies/$slug'
     | '/services/custom-software-development'
     | '/services/custom-website-development'
     | '/services/mobile-app-development'
     | '/services/mvp-development'
     | '/services/saas-development'
     | '/services/web-app-development'
+    | '/case-studies/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  CaseStudiesRoute: typeof CaseStudiesRoute
+  CaseStudiesRoute: typeof CaseStudiesRouteWithChildren
   ContactRoute: typeof ContactRoute
   IndustriesRoute: typeof IndustriesRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
@@ -287,6 +309,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/case-studies/': {
+      id: '/case-studies/'
+      path: '/'
+      fullPath: '/case-studies/'
+      preLoaderRoute: typeof CaseStudiesIndexRouteImport
+      parentRoute: typeof CaseStudiesRoute
+    }
     '/services/web-app-development': {
       id: '/services/web-app-development'
       path: '/services/web-app-development'
@@ -329,6 +358,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesCustomSoftwareDevelopmentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/case-studies/$slug': {
+      id: '/case-studies/$slug'
+      path: '/$slug'
+      fullPath: '/case-studies/$slug'
+      preLoaderRoute: typeof CaseStudiesSlugRouteImport
+      parentRoute: typeof CaseStudiesRoute
+    }
     '/api/send-email': {
       id: '/api/send-email'
       path: '/api/send-email'
@@ -339,10 +375,24 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface CaseStudiesRouteChildren {
+  CaseStudiesSlugRoute: typeof CaseStudiesSlugRoute
+  CaseStudiesIndexRoute: typeof CaseStudiesIndexRoute
+}
+
+const CaseStudiesRouteChildren: CaseStudiesRouteChildren = {
+  CaseStudiesSlugRoute: CaseStudiesSlugRoute,
+  CaseStudiesIndexRoute: CaseStudiesIndexRoute,
+}
+
+const CaseStudiesRouteWithChildren = CaseStudiesRoute._addFileChildren(
+  CaseStudiesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  CaseStudiesRoute: CaseStudiesRoute,
+  CaseStudiesRoute: CaseStudiesRouteWithChildren,
   ContactRoute: ContactRoute,
   IndustriesRoute: IndustriesRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,

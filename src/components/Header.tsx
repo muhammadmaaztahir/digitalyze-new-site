@@ -35,7 +35,7 @@ const services = [
     icon: Users,
     name: "Custom CRM Development",
     desc: "Tailored CRMs that fit your sales workflow perfectly.",
-    to: "/services/custom-crm-development",
+    to: "/contact",
   },
   {
     icon: Rocket,

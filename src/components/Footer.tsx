@@ -7,7 +7,7 @@ const services = [
   { name: "Mobile App Development", to: "/services/mobile-app-development" },
   { name: "Web App Development", to: "/services/web-app-development" },
   { name: "SaaS Development", to: "/services/saas-development" },
-  { name: "Custom CRM Development", to: "/services/custom-crm-development" },
+  { name: "Custom CRM Development", to: "/contact" },
   { name: "MVP Development", to: "/services/mvp-development" },
   { name: "Custom Software Development", to: "/services/custom-software-development" },
 ] as const;

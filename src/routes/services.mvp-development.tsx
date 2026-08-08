@@ -148,15 +148,15 @@ const process = [
 ];
 
 const cases = [
-  { name: "FinPilot", desc: "Budgeting app for freelancers", result: "Raised $450k pre-seed 8 weeks after launch" },
-  { name: "ClinicOS", desc: "Practice-management SaaS for dentists", result: "1,200 paying users in first 90 days" },
-  { name: "GigMatch", desc: "Marketplace for event musicians", result: "Booked $80k GMV in month one" },
+  { name: "TradeFlow", desc: "B2B marketplace platform for suppliers & buyers", result: "Full MVP shipped in 8 weeks, secured seed funding" },
+  { name: "Skill Space", desc: "Multi-tenant learning management system", result: "Supports 500+ concurrent students cleanly" },
+  { name: "Mobirays", desc: "Custom e-commerce store & brand identity", result: "Online store live in 6 weeks, 4.2% conversion rate" },
 ];
 
 const testimonials = [
-  { quote: "Digitalyze built our MVP in 5 weeks. We closed our seed round the month after launch.", name: "Priya S.", role: "Founder, FinPilot" },
-  { quote: "Fixed timeline, fixed budget, zero drama. The prototype alone got us three pilot customers.", name: "Marco R.", role: "CEO, ClinicOS" },
-  { quote: "They pushed back on scope in the best way — we launched leaner and learned faster.", name: "Ade K.", role: "Founder, GigMatch" },
+  { quote: "Digitalyze built and shipped our B2B marketplace MVP in under 8 weeks. The weekly working demos and their agile approach helped us secure our seed funding round.", name: "Faisal Sheikh", role: "Co-founder, TradeFlow" },
+  { quote: "Building a scalable, multi-tenant learning management system from scratch was a massive challenge. Digitalyze delivered Skill Space on time, supporting hundreds of concurrent users without any lag.", name: "Sarah Jenkins", role: "Director, Skill Space" },
+  { quote: "We had a strong product offering but lacked a functional online store. Digitalyze developed our custom e-commerce platform and brand identity in 6 weeks. Over 40% of our sales shifted online in month one.", name: "Rayyan Siddiqui", role: "Founder, Mobirays" },
 ];
 
 const faqs = [

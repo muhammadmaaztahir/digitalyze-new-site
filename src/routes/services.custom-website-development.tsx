@@ -302,16 +302,16 @@ const process = [
 
 // ── Portfolio ──────────────────────────────────────────────────────────────────
 const cases = [
-  { name: "GreenLeaf Organics", desc: "Shopify store for a wellness brand", result: "3× conversion rate in 60 days" },
-  { name: "Hartwell Law Group", desc: "WordPress site for a US law firm", result: "58% more qualified leads per month" },
-  { name: "Novaflow SaaS", desc: "Webflow marketing site for a B2B SaaS", result: "Launched in 12 days, $0 dev debt" },
+  { name: "Scentyque", desc: "Shopify store for a premium fragrance brand", result: "3,500+ orders in the first 3 months" },
+  { name: "True Refined Solutions", desc: "Corporate website for an IT consulting firm", result: "75% increase in enterprise inquiries" },
+  { name: "Al Saudi Pak", desc: "Bilingual recruitment platform for Saudi-Pak market", result: "Tripled candidate inquiry conversions" },
 ];
 
 // ── Testimonials ───────────────────────────────────────────────────────────────
 const testimonials = [
-  { quote: "They took our outdated WordPress site and turned it into something that actually converts. Our bounce rate dropped by half in the first month.", name: "Laura M.", role: "Founder, GreenLeaf Organics" },
-  { quote: "Our Shopify store now runs like a machine. They handled the custom theme, integrations, and even trained our team — all on time and on budget.", name: "James R.", role: "COO, DTC Sportswear Brand" },
-  { quote: "The Webflow site they built for us ranks on page one for our core keywords and looks absolutely stunning. Worth every penny.", name: "Priya K.", role: "Marketing Lead, Novaflow" },
+  { quote: "They took our vision of a luxury fragrance brand and turned it into a high-converting Shopify store. The custom theme design and COD integration worked flawlessly. We did over 3,500 orders within three months of launch.", name: "Zara Ahmed", role: "Founder, Scentyque" },
+  { quote: "We wanted a website that speaks to C-suite decision-makers. Digitalyze rebuilt our corporate page with an emphasis on lead qualification. Our inquiry rates went up by 75% almost immediately.", name: "Michael Thornton", role: "Managing Director, True Refined Solutions" },
+  { quote: "Our recruitment agency needed RTL support and Arabic/Urdu translation. Digitalyze built a bilingual portal that completely streamlined our pipeline, tripling candidate inquiries.", name: "Tariq Mahmood", role: "CEO, Al Saudi Pak" },
 ];
 
 // ── FAQ ────────────────────────────────────────────────────────────────────────

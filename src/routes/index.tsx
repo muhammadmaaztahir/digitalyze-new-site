@@ -22,6 +22,17 @@ import project4 from "@/assets/project4.jpg";
 import project5 from "@/assets/project5.jpg";
 import project6 from "@/assets/project6.jpg";
 import project7 from "@/assets/project7.jpg";
+import { featuredProjects } from "@/lib/projects";
+
+const imageMap: Record<string, string> = {
+  project1,
+  project2,
+  project3,
+  project4,
+  project5,
+  project6,
+  project7,
+};
 
 const heroDashboardImages = [
   heroDashboard1,
@@ -40,7 +51,7 @@ const services = [
   { icon: Smartphone, name: "Mobile App Development", desc: "Native and cross-platform apps for iOS and Android that users love.", to: "/services/mobile-app-development" },
   { icon: Globe, name: "Web App Development", desc: "Scalable, fast web applications built with modern frameworks.", to: "/services/web-app-development" },
   { icon: Cloud, name: "SaaS Development", desc: "End-to-end SaaS platforms with billing, auth and multi-tenancy.", to: "/services/saas-development" },
-  { icon: Users, name: "Custom CRM Development", desc: "Tailored CRMs that fit your sales and operations perfectly.", to: "/services/custom-crm-development" },
+  { icon: Users, name: "Custom CRM Development", desc: "Tailored CRMs that fit your sales and operations perfectly.", to: "/contact" },
   { icon: Rocket, name: "MVP Development", desc: "Ship your MVP in weeks — validate fast, iterate faster.", to: "/services/mvp-development" },
   { icon: Code2, name: "Custom Software Development", desc: "Bespoke software built exactly around your business logic.", to: "/services/custom-software-development" },
 ] as const;
@@ -59,19 +70,14 @@ const steps = [
   { icon: Send, title: "Deployment & Support", desc: "Launch, monitor, and continuously improve after go-live." },
 ];
 
-const portfolio = [
-  { name: "FinFlow", desc: "Personal finance app with 50k+ downloads.", tag: "Mobile App", image: project1, website: "https://innovationsapplied.com/" },
-  { name: "ClinicOS", desc: "Multi-tenant clinic management SaaS.", tag: "SaaS", image: project6, website: "http://learning-hub-lms.vercel.app/" },
-  { name: "SalesPilot", desc: "Custom CRM for a 200-person sales org.", tag: "CRM", image: project5, website: "https://mobirays.com/" },
-  { name: "MerchantHub", desc: "B2B marketplace MVP shipped in 8 weeks.", tag: "MVP", image: project7, website: "https://tradeflow.digitalyze.tech/" },
-];
+
 
 const testimonials = [
-  { quote: "We had a rough Figma file and a deadline. Digitalyze turned it into a working MVP in under 7 weeks, and actually pushed back on a few features that would've slowed us down. That kind of honesty is rare.", name: "Sarah Chen", role: "Founder, FinFlow" },
-  { quote: "Our old CRM was basically a spreadsheet with extra steps. They rebuilt it around how our sales team actually works, not some generic template. Adoption was instant because it just made sense.", name: "Marcus Johnson", role: "COO, SalesPilot" },
-  { quote: "What stood out was the weekly demos. No black box for a month and then a surprise. We always knew exactly where the build stood, and the final product needed almost no revisions.", name: "Aisha Patel", role: "CEO, ClinicOS" },
-  { quote: "We came in wanting a simple booking app and left with a much better product because the team kept asking the right questions early on instead of just building what we asked for.", name: "Daniyal Raza", role: "Co-founder, MerchantHub" },
-  { quote: "Pricing was fixed upfront and stayed that way, even when we added a couple of features mid-project. No invoice surprises, which after two bad agency experiences was honestly the main thing that won us over.", name: "Emily Grant", role: "Operations Lead, Northbridge Retail" }
+  { quote: "We needed a modern, highly professional web presence to showcase our IT consulting services. Digitalyze designed and built a fast, SEO-optimised platform that boosted our qualified inbound leads by 60% within three months.", name: "Alex Mercer", role: "Partner, Innovations Applied" },
+  { quote: "Building a scalable, multi-tenant learning management system from scratch was a massive challenge. Digitalyze delivered Skill Space on time, supporting hundreds of concurrent users with zero performance issues.", name: "Sarah Jenkins", role: "Director, Skill Space" },
+  { quote: "We had a strong product offering but lacked a functional online store. Digitalyze developed our custom e-commerce platform and brand identity in 6 weeks. Today, over 40% of our sales are processed directly online.", name: "Rayyan Siddiqui", role: "Founder, Mobirays" },
+  { quote: "We needed to move fast to validate our B2B marketplace idea. Digitalyze shipped our fully functional MVP in under 8 weeks. The weekly working demos and their agile approach helped us secure our seed funding round.", name: "Faisal Sheikh", role: "Co-founder, TradeFlow" },
+  { quote: "We wanted to establish a premium presence in a highly competitive e-commerce landscape. Digitalyze designed a stunning fragrance web store with custom themes and cash-on-delivery. We processed over 3,500 orders in the first 3 months.", name: "Zara Ahmed", role: "Founder, Scentyque" }
 ];
 
 const faqs = [
@@ -420,6 +426,22 @@ function HeroDashboardCarousel() {
     setTimeout(() => setPaused(false), 3000);
   };
 
+  // Variants for Framer Motion animation to work with custom parameter 'direction' cleanly
+  const slideVariants = {
+    initial: (dir: number) => ({
+      opacity: 0,
+      x: dir === 1 ? 80 : -80,
+    }),
+    animate: {
+      opacity: 1,
+      x: 0,
+    },
+    exit: (dir: number) => ({
+      opacity: 0,
+      x: dir === 1 ? -80 : 80,
+    }),
+  };
+
   return (
     <div
       className="relative w-full max-w-lg lg:max-w-full flex items-center justify-center overflow-visible touch-pan-y select-none"
@@ -443,9 +465,10 @@ function HeroDashboardCarousel() {
           key={index}
           src={heroDashboardImages[index]}
           custom={direction}
-          initial={(dir: number) => ({ opacity: 0, x: dir === 1 ? 80 : -80 })}
-          animate={{ opacity: 1, x: 0 }}
-          exit={(dir: number) => ({ opacity: 0, x: dir === 1 ? -80 : 80 })}
+          variants={slideVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
           transition={{
             x: { type: "spring", stiffness: 100, damping: 20 },
             opacity: { duration: 0.4 }
@@ -654,12 +677,12 @@ function Home() {
             </div>
           </Reveal>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {portfolio.map((p, i) => (
-              <Reveal key={p.name} delay={i * 0.08}>
+            {featuredProjects.map((p, i) => (
+              <Reveal key={p.slug} delay={i * 0.08}>
                 <div className="group rounded-lg overflow-hidden bg-card border border-border card-hover">
                   <div className="sm:h-44 h-60 relative overflow-hidden">
                     <img
-                      src={p.image}
+                      src={imageMap[p.image]}
                       alt={p.name}
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
@@ -669,9 +692,13 @@ function Home() {
                     <h3 className="mt-2 text-lg font-bold text-navy">{p.name}</h3>
                     <p className="mt-1 text-sm text-muted-foreground">{p.desc}</p>
                     <div className="mt-7 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
-                      <a href="#" className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy group-hover:text-brand transition-colors">
+                      <Link
+                        to="/case-studies/$slug"
+                        params={{ slug: p.slug }}
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy group-hover:text-brand transition-colors"
+                      >
                         View Case Study <ArrowRight className="h-4 w-4" />
-                      </a>
+                      </Link>
                       <a
                         href={p.website}
                         target="_blank"
